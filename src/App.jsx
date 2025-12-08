@@ -1,24 +1,32 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import AppLayout from "./layouts/AppLayout";
+import RequireAuth from "./auth/RequireAuth";
 
-import React, { useState } from 'react';
-import Sidebar from './components/Sidebar';
-import Dashboard from './components/Dashboard';
-import Broadcast from './components/Broadcast';
-import Reports from './components/Reports';
-import './App.css';
+import SignIn from "./pages/SignIn";
+import Dashboard from "./components/Dashboard";
+import Broadcast from "./components/Broadcast";
+import Reports from "./components/Reports";
 
-const App = () => {
-  const [activePage, setActivePage] = useState('dashboard');
-
+export default function App() {
   return (
-    <div className="flex h-screen bg-gray-100">
-      <Sidebar activePage={activePage} setActivePage={setActivePage} />
-      <div className="flex-1 overflow-auto p-8">
-        {activePage === 'dashboard' && <Dashboard />}
-        {activePage === 'broadcast' && <Broadcast />}
-        {activePage === 'reports' && <Reports />}
-      </div>
-    </div>
-  );
-};
+    <BrowserRouter>
+      <Routes>
+        {/* Public */}
+        <Route path="/" element={<SignIn />} />
 
-export default App;
+        {/* Protected */}
+        <Route
+          element={
+            <RequireAuth>
+              <AppLayout />
+            </RequireAuth>
+          }
+        >
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/broadcast" element={<Broadcast />} />
+          <Route path="/reports" element={<Reports />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  );
+}

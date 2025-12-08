@@ -1,14 +1,32 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function SignInForm() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+
+const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle sign-in logic here
-    console.log("Username:", username);
-    console.log("Password:", password);
+
+    const res = await fetch("http://localhost:8000/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include", // ✅ IMPORTANT
+      body: JSON.stringify({
+        email: username,
+        password: password,
+      }),
+    });
+
+    if (res.ok) {
+      navigate("/dashboard"); // ✅ Done
+    } else {
+      alert("Invalid email or password");
+    }
   };
 
   return (
