@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AppLayout from "./layouts/AppLayout";
 import RequireAuth from "./auth/RequireAuth";
 
+import LandingPage from "./pages/LandingPage";
 import SignIn from "./pages/SignIn";
 import Dashboard from "./components/Dashboard";
 import Broadcast from "./components/Broadcast";
@@ -11,10 +12,11 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Public */}
-        <Route path="/" element={<SignIn />} />
+        {/* Public Routes */}
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/signin" element={<SignIn />} />
 
-        {/* Protected */}
+        {/* Protected Routes */}
         <Route
           element={
             <RequireAuth>

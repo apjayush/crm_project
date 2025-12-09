@@ -130,7 +130,7 @@ const Broadcast = () => {
           {loadingTemplates ? (
             <p className="text-gray-500">Loading templates...</p>
           ) : (
-            <div className="space-y-3">
+            <div className="space-y-3 max-h-96 overflow-y-auto pr-2">
               {templates.map(tpl => (
                 <div
                   key={tpl.id}
@@ -179,7 +179,7 @@ const Broadcast = () => {
           {loadingRecipients ? (
             <p className="text-gray-500">Loading recipients...</p>
           ) : (
-            <div className="space-y-2">
+            <div className="space-y-2 max-h-64 overflow-y-auto pr-2">
               {recipients.map(r => (
                 <div
                   key={r.number}
