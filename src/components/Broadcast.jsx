@@ -99,13 +99,14 @@ const Broadcast = () => {
         template_id: selectedTemplate.id,
         recipients: selectedRecipients,
         has_header: selectedTemplate.has_header,
+        header_format:selectedTemplate.header_format,
         template_name: selectedTemplate.name,
         template_language: selectedTemplate.language
       }),
     })
       .then(() => {
         setShowSuccess(true);
-        showNotification('success', 'Broadcast queued successfully!');
+        showNotification('success', 'Broadcast sent successfully!');
         setTimeout(() => {
           setShowSuccess(false);
           setSelectedRecipients([]);
@@ -243,7 +244,7 @@ const Broadcast = () => {
             <div className="bg-green-600 rounded-full p-1">
               <Check className="text-white" size={20} />
             </div>
-            <span className="text-green-800 font-medium">Broadcast queued successfully!</span>
+            <span className="text-green-800 font-medium">Broadcast sent successfully!</span>
           </div>
         )}
 
